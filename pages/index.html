@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Hello Express!</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./style.min.css" />
+    <link rel="stylesheet" href="./bootstrap.min.css" />
+    <style type="text/css">
+      .disclaimer {
+        font-size: 12px;
+        margin-right: auto;
+        margin-left: auto;
+        text-align: center;
+        color: #eb0c0c;
+      }
+
+      .questions {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 100% 8px;
+        /*height: 32px;*/
+        min-height: 32px;
+        padding: 24px 32px 16px;
+        margin-bottom: 8px;
+      }
+
+      .suggestion-items {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-flow: wrap;
+        gap: 100% 8px;
+        order: 1;
+        /*height: 34px;*/
+        padding-inline-end: 2px;
+        overflow: hidden;
+      }
+
+      .container:not([mobile]) {
+        width: auto;
+      }
+
+      a.suggestion-item {
+        order: 1;
+        max-width: -webkit-fill-available;
+        border: 1px solid #0665f39d;
+        border-radius: 10px;
+        margin-bottom: 5px;
+      }
+
+      .container {
+        /*height: 28px;
+    min-width: max-content;*/
+        overflow: hidden;
+        box-sizing: border-box;
+        padding: 0px 12px;
+        margin: 0px;
+        border: none;
+        cursor: pointer;
+        /* color: #174ae4;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 10px; */
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 600;
+        font-variation-settings: unset;
+        text-decoration: none;
+      }
+
+      .text-search {
+        font-size: 0.85rem;
+        color: dimgray;
+      }
+
+      .more {
+        position: initial;
+        right: 10px;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .attribution-container {
+        display: flex;
+        flex-direction: row;
+        row-gap: 6px;
+        width: 95%;
+        justify-content: end;
+      }
+
+      .attribution-items {
+        display: flex;
+        flex-flow: wrap;
+        row-gap: 6px;
+        justify-content: flex-end;
+        height: 30px;
+        overflow: hidden;
+        border-bottom: 1px solid lightgray;
+        padding-bottom: 10px;
+      }
+
+      .attribution-item {
+        cursor: pointer;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: max-content;
+        height: 24px;
+        border-radius: 5px;
+        box-sizing: border-box;
+        padding: 0px 8px;
+        margin-inline-end: 6px;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 600;
+        font-variation-settings: unset;
+        border: 1px solid;
+        background-color: #f0f8ff;
+        border-right: 2px solid;
+        border-bottom: 2px solid;
+      }
+
+      /* Micrófono */
+      /*.mic-button-off-container{
+          height:100%;
+          align-self:center;
+          display:grid;
+          grid-template-columns:100%;
+          grid-template-rows:100%;
+          justify-content:center;
+          align-content:center;
+          align-items:center;
+          justify-items:center;
+          border: unset;
+      }
+      */
+      .mic-butt .mic-button-off-container .mic-background {
+        display: none;
+      }
+      .mic-button-off-container .mic-icon {
+        /*content: url("{{ url_for('static', filename='assets/mic-off-icon.svg') }}");*/
+        height: 27px;
+        grid-column: 1;
+        grid-row: 1;
+      }
+      .mic-button-on-container .mic-background {
+        height: 25px !important;
+        aspect-ratio: 1/1;
+        grid-column: 1;
+        grid-row: 1;
+        border-radius: 100%;
+        background-color: #ff4500;
+        display: inline;
+      }
+      @keyframes mic-on-anim {
+        50% {
+          opacity: 0;
+        }
+      }
+      .mic-button-on-container .mic-icon {
+        content: url("{{ url_for('static', filename='assets/mic-on-icon.gif') }}");
+        height: 73%;
+        grid-column: 1;
+        grid-row: 1;
+        animation: mic-on-anim.5s linear infinite;
+      }
+      @media (max-width: 992px) {
+        .mic-button-on-container .mic-icon {
+          height: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="contentChatSilvia d-flex-R align-items-stretch">
+        <div class="row no-gutters gx-0 w-100">
+          <div id="panelChat" class="col align-items-stretch">
+            <div class="card border-0 altoChat position-relative">
+              <!--chat-->
+              <div id="messagebox" class="card-body contentNuevoChat"></div>
+              <!--chat-->
+              <div class="card-footer footerChatSilvia">
+                <div class="d-flex-R flex-column-R">
+                  <div
+                    class="d-flex-R justify-content-center align-items-center contentMicrofono"
+                  >
+                    <div class="p-0">
+                      <p class="p-0 m-0 fw-bold">Haz una pregunta:</p>
+                    </div>
+                    <div class="p-0 ms-2"></div>
+                  </div>
+                  <div class="p-0">
+                    <div
+                      id="userInput"
+                      class="input-group input-group-lg mb-2 camboChatSilvia"
+                    >
+                      <textarea
+                        id="userMessage"
+                        class="form-control campoChat"
+                        maxlength="300"
+                        type="text"
+                        name="msg"
+                      ></textarea>
+                      <button
+                        id="mic"
+                        class="mic-button-off-container"
+                        onclick="speech2Silvia(this)"
+                        title="Presiona [Control + Espacio] para acceso rápido!"
+                      >
+                        <div class="mic-background"></div>
+                        <div class="mic-icon" alt="Micrófono"></div>
+                      </button>
+                      <button
+                        hx-post="/messages"
+                        hx-target="#messagebox"
+                        id="sendButton"
+                        type="submit"
+                        class="btn btn-Chat"
+                        type="button"
+                      >
+                        <img src="./assets/icon-enviar-chat.svg" alt="Avatar" />
+                      </button>
+                    </div>
+                    <div class="p-0">
+                      <p class="p-0 m-0 linkCondiciones">
+                        Información Importante: "SilvIA es un asistente basado
+                        en una API de OpenAI, que brinda respuestas basadas en
+                        una amplia gama de datos y textos recopilados de
+                        internet y de los productos digitales LEGIS"
+                        <a
+                          href=""
+                          data-bs-toggle="modal"
+                          data-bs-target="#mensajeCondiciones"
+                        >
+                          Conoce aquí términos y condiciones.</a
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./htmx.min.js" defer></script>
+    <script src="./bootstrap.min.js" defer></script>
+  </body>
+</html>

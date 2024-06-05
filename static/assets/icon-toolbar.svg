@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 43.915 37.624" xmlns="http://www.w3.org/2000/svg">
+  <path id="Trazado_1754" data-name="Trazado 1754" d="M 21.958 1.949 C 11.095 1.949 2.287 9.447 2.287 18.695 C 2.317 22.366 3.682 25.899 6.129 28.635 C 6.67 30.586 5.907 32.666 4.23 33.801 C 4.23 33.801 2.82 33.189 2.82 34.029 C 2.82 34.868 6.298 37.545 12.756 33.498 L 12.756 33.498 C 15.651 34.79 18.785 35.453 21.954 35.443 C 32.819 35.443 41.628 27.946 41.628 18.697 C 41.628 9.449 32.823 1.949 21.958 1.949 Z" fill="#253eef" style="stroke-linecap: square; stroke-miterlimit: 0; paint-order: stroke; stroke-width: 3px; stroke: rgb(255, 255, 255);"/>
+  <g id="Grupo_1134" data-name="Grupo 1134" transform="matrix(1, 0, 0, 1, -5959.654785, -4169.954102)">
+    <circle id="Elipse_215" data-name="Elipse 215" cx="1.356" cy="1.356" r="1.356" transform="translate(5973.785 4187.41)" fill="#fafafc"/>
+    <circle id="Elipse_216" data-name="Elipse 216" cx="1.356" cy="1.356" r="1.356" transform="translate(5980.583 4187.41)" fill="#fafafc"/>
+    <circle id="Elipse_217" data-name="Elipse 217" cx="1.356" cy="1.356" r="1.356" transform="translate(5986.727 4187.41)" fill="#fafafc"/>
+  </g>
+</svg>
